@@ -1,120 +1,128 @@
-import { useState } from "react";
+import "./App.css";
+
+type Shortcut = {
+  label: string;
+  icon: string;
+  tone: string;
+};
+
+const shortcuts: Shortcut[] = [
+  { label: "Hotmail", icon: "M", tone: "blue" },
+  { label: "IBM Chat", icon: "IBM", tone: "midnight" },
+  { label: "W3 Home", icon: "W3", tone: "violet" },
+  { label: "GainSight", icon: "G", tone: "green" },
+  { label: "IBM Cloud", icon: "C", tone: "cyan" },
+  { label: "Translate", icon: "T", tone: "sky" },
+  { label: "Baidu", icon: "du", tone: "indigo" },
+  { label: "UFJ", icon: "MU", tone: "red" },
+  { label: "Information", icon: "H", tone: "forest" },
+];
+
+const SearchIcon = () => (
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="m21 21-4.35-4.35m1.35-5.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" />
+  </svg>
+);
+
+const MicIcon = () => (
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="M12 4a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V7a3 3 0 0 0-3-3Z" />
+    <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+  </svg>
+);
+
+const LensIcon = () => (
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="M7 6H5a2 2 0 0 0-2 2v2m14-4h2a2 2 0 0 1 2 2v2M7 18H5a2 2 0 0 1-2-2v-2m14 4h2a2 2 0 0 0 2-2v-2" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
+const SparkIcon = () => (
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="M12 3l1.45 4.35L18 9l-4.55 1.65L12 15l-1.45-4.35L6 9l4.55-1.65L12 3Z" />
+    <path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14Z" />
+  </svg>
+);
+
+const ShareIcon = () => (
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <circle cx="18" cy="5" r="3" />
+    <circle cx="6" cy="12" r="3" />
+    <circle cx="18" cy="19" r="3" />
+    <path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4" />
+  </svg>
+);
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: "Todo 1",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Todo 2",
-      completed: false,
-    },
-    {
-      id: 3,
-      title: "Todo 3",
-      completed: false,
-    },
-  ]);
-
-  const handleAddTodo = () => {
-    setTodos([
-      ...todos,
-      {
-        id: todos.length + 1,
-        title: title,
-        completed: false,
-      },
-    ]);
-
-    setTitle("");
-  };
-
-  const handleToggleTodo = (id: number) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="max-w-md bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-8">
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h1 className="text-[2rem] font-bold text-center text-gray-800 mb-6">
-            📝 Todoアプリ!
-          </h1>
+    <main className="new-tab-shell">
+      <nav className="top-links" aria-label="Quick links">
+        <a href="#">Gmail</a>
+        <a href="#">Images</a>
+      </nav>
 
-          <div className="flex gap-2 mb-6">
-            <input
-              type="text"
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="新しいタスクを入力..."
-              aria-label="新しいタスクを入力"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-            <button
-              onClick={handleAddTodo}
-              className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 shadow-lg"
-            >
-              追加
+      <section className="hero-row" aria-label="Search demo">
+        <div className="search-stage">
+          <div className="logo-lockup">
+            <div className="google-mark" aria-label="Google inspired World Cup demo logo">
+              <span className="doodle-letter">G</span>
+              <span className="soccer-ball" aria-hidden="true">
+                <span />
+              </span>
+              <span className="flower-mark" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </span>
+              <span className="doodle-letter">g</span>
+              <span className="doodle-letter">l</span>
+              <span className="doodle-letter">e</span>
+            </div>
+
+            <aside className="demo-copy">
+              <p>Demo for IBM Bob</p>
+              <p>Code Engine Specialist mode</p>
+            </aside>
+          </div>
+
+          <button className="share-button" aria-label="Share demo">
+            <ShareIcon />
+          </button>
+
+          <div className="search-box" role="search">
+            <SearchIcon />
+            <input aria-label="Search" placeholder="Search Google or type a URL" />
+            <button aria-label="Voice search">
+              <MicIcon />
+            </button>
+            <button aria-label="Image search">
+              <LensIcon />
+            </button>
+            <button className="ai-mode" aria-label="AI Mode">
+              <SparkIcon />
+              <span>AI Mode</span>
             </button>
           </div>
-          {todos.length === 0 ? (
-            <div className="text-center text-gray-500 py-8">
-              <p className="text-lg">タスクがありません</p>
-              <p className="text-sm">新しいタスクを追加してください</p>
-            </div>
-          ) : (
-            <ul className="space-y-3">
-              {todos.map((todo) => (
-                <li
-                  key={todo.id}
-                  className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 ${
-                    todo.completed
-                      ? "bg-gray-50 border-gray-200"
-                      : "bg-white border-gray-300 hover:border-blue-300"
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={todo.completed}
-                    onChange={() => handleToggleTodo(todo.id)}
-                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                  />
-                  <span
-                    className={`flex-1 ${
-                      todo.completed
-                        ? "line-through text-gray-500"
-                        : "text-gray-800"
-                    }`}
-                  >
-                    {todo.title}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
 
-          {todos.length > 0 && (
-            <div className="mt-6 pt-4 border-t border-gray-200">
-              <p className="text-sm text-gray-600 text-center">
-                完了済み: {todos.filter((todo) => todo.completed).length} /{" "}
-                {todos.length}
-              </p>
-            </div>
-          )}
+          <div className="shortcut-grid" aria-label="Application shortcuts">
+            {shortcuts.map((shortcut) => (
+              <button
+                className={`shortcut shortcut-${shortcut.tone}`}
+                key={shortcut.label}
+                title={shortcut.label}
+                aria-label={shortcut.label}
+              >
+                <span>{shortcut.icon}</span>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
 export default App;
-
